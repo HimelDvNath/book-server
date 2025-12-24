@@ -34,6 +34,9 @@ io.on("connection", (socket) => {
     socket.on("newComment", ({ bookId }) => {
         io.emit("newComment", { bookId });
     });
+    socket.on("loggedOut", (userEmail) => {
+        users.delete(userEmail);
+    });
 
     socket.on("disconnect", () => {
         for (let [key, value] of users.entries()) {
